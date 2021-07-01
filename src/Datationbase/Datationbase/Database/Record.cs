@@ -7,12 +7,5 @@ using System.Threading.Tasks;
 
 namespace Datationbase.Database
 {
-    class Record
-    {
-        Dictionary<string, object> data;
-        public Record(Dictionary<string, object> data)
-        {
-            this.data = data; ;
-        }
-    }
+    class Record : Dictionary<string, object> {}
 }

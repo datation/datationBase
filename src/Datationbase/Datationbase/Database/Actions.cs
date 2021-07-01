@@ -12,17 +12,15 @@ namespace Datationbase.Database
         /**
          * This function will take a list of Records and return only the Records that meet all given predicates.
          **/
-        public static HashSet<Record> Select(HashSet<Record> hashSet, List<Predicate<Record>> predicates)
+        public static List<Record> Select(List<Record> table, List<Predicate<Record>> predicates)
         {
-            var clonedSet = new HashSet<Record>(hashSet, hashSet.Comparer);
-            foreach (Record record in clonedSet)
+            List<Record> filteredList = table;
+            foreach (Predicate<Record> predicate in predicates)
             {
-                foreach (Predicate<Record> predicate in predicates)
-                {
-                    clonedSet.RemoveWhere(predicate);
-                }
+                filteredList = filteredList.FindAll(predicate);
             }
-            return clonedSet;
+            return filteredList;
         }
+
     }
 }
