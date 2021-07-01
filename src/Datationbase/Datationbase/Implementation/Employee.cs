@@ -11,7 +11,7 @@ namespace Datationbase.Implementation
     {
         public static Record New(int id, string name, int salary)
         {
-            Record record = new Record ();
+            Record record = new Record();
             record.Add("id", id);
             record.Add("name", name);
             record.Add("salary", salary);

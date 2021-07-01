@@ -24,9 +24,12 @@ namespace Datationbase
             adsd.Add(pred2);
             Table<Record> newEmployees = Actions.Select(employees, adsd); // SELECT * FROM Employee WHERE SALARY > 50000 AND SALARY < 70000
             Console.WriteLine("yeah");
-            List<string> fieldsToDisplay = new List<string> { "id", "name" };  
+            List<string> fieldsToDisplay = new List<string> { "id", "name" };
             Table<Record> projectedEmployees = Actions.Project(employees, fieldsToDisplay); // SELECT id, name FROM Employee
             Console.WriteLine("yeah2");
+            Dictionary<string, string> keysToReplace = new Dictionary<string, string>() { ["name"] = "full name"};
+            Table<Record> renamedEmployees = Actions.RenameColumns(employees, keysToReplace); // SELECT *, name AS "full name" as FROM Employee
+            Console.WriteLine("yeah3");
 
         }
     }

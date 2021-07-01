@@ -28,13 +28,22 @@ namespace Datationbase.Database
          */
         public static Table<Record> Project(Table<Record> table, List<string> columns)
         {
-            Table<Record> sddd = new Table<Record>();
+            Table<Record> newTable = new Table<Record>();
             foreach (Record record in table)
             {
-                sddd.Add(record.Filter(it => columns.Contains(it.Key)));
+                newTable.Add(Record.Filter(record, it => columns.Contains(it.Key)));
             }
-            return sddd;
+            return newTable;
         }
 
+        public static Table<Record> RenameColumns(Table<Record> table, Dictionary<string, string> columnRenames)
+        {
+            Table<Record> newTable = new Table<Record>();
+            foreach (Record record in table)
+            {
+                newTable.Add(Record.ReplaceKeys(record, columnRenames));
+            }
+            return newTable;
+        }
     }
 }
