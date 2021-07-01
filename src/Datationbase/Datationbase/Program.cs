@@ -24,8 +24,8 @@ namespace Datationbase
             adsd.Add(pred2);
             Table<Record> newEmployees = Actions.Select(employees, adsd); // SELECT * FROM Employee WHERE SALARY > 50000 AND SALARY < 70000
             Console.WriteLine("yeah");
-            List<string> fieldsToDisplay = new List<string> { "id", "name" };
-            Table<Record> projectedEmployees = Actions.Project(employees, fieldsToDisplay);
+            List<string> fieldsToDisplay = new List<string> { "id", "name" };  
+            Table<Record> projectedEmployees = Actions.Project(employees, fieldsToDisplay); // SELECT id, name FROM Employee
             Console.WriteLine("yeah2");
 
         }

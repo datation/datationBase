@@ -15,12 +15,12 @@ namespace Datationbase.Database
          */
         public static Table<Record> Select(Table<Record> table, List<Predicate<Record>> predicates)
         {
-            Table<Record> filteredTable = table;
+            Table<Record> filteredTable = new Table<Record>(table);
             foreach (Predicate<Record> predicate in predicates)
             {
-                filteredTable = filteredTable.filter(predicate);
+                filteredTable.RemoveWhere((Record record) => predicate(record) == false);
             }
-            return table;
+            return filteredTable;
         }
 
         /**

@@ -8,14 +8,7 @@ namespace Datationbase.Database
 {
     class Table<Record> : HashSet<Record>
     {
-        /**
-         * filters the Table by the given predicate
-         */
-        public Table<Record> filter(Predicate<Record> pred)
-        {
-            // TODO should we copy the Table??
-            RemoveWhere((Record record) => pred(record) == false);
-            return this;
-        }
+        public Table() : base() { }
+        public Table(HashSet<Record> hashSet) : base(hashSet) { }
     }
 }
