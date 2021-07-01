@@ -22,5 +22,13 @@ namespace Datationbase.Database
      *   }
      * }
      */
-    abstract class Record : Dictionary<string, object> {}
+    class Record : Dictionary<string, object> {
+        public Record(): base() { }
+        public Record(IDictionary<string, object> dictionary) : base(dictionary) { }
+
+        public Record Filter(Predicate<KeyValuePair<string, object>> pred)
+        {
+            return new Record(this.Where(it => pred(it)).ToDictionary(i => i.Key, i => i.Value));
+        }
+    }
 }

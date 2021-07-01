@@ -13,11 +13,12 @@ namespace Datationbase.Database
          * The select operator is used to select records in our table.
          * This function will take a list of Records and return only the Records that meet all given predicates.
          */
-        public static Table<T> Select<T>(Table<T> table, List<Predicate<T>> predicates) where T : Record
+        public static Table<Record> Select(Table<Record> table, List<Predicate<Record>> predicates)
         {
-            foreach (Predicate<T> predicate in predicates)
+            Table<Record> filteredTable = table;
+            foreach (Predicate<Record> predicate in predicates)
             {
-                table.filter(predicate);
+                filteredTable = filteredTable.filter(predicate);
             }
             return table;
         }
@@ -27,15 +28,12 @@ namespace Datationbase.Database
          */
         public static Table<Record> Project(Table<Record> table, List<string> columns)
         {
-            //foreach (Record record in table)
-            //{
-            //    Record newRecoord = new Record();
-            //    columns.ForEach((string column) => {
-            //        newRecoord.Add(column, record[column]);
-            //    });
-            //    record = newRecoord;
-            //});
-            return table;
+            Table<Record> sddd = new Table<Record>();
+            foreach (Record record in table)
+            {
+                sddd.Add(record.Filter(it => columns.Contains(it.Key)));
+            }
+            return sddd;
         }
 
     }

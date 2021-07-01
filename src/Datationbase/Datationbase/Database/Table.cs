@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Datationbase.Database
 {
-    class Table<T> : HashSet<T> where T : Record
+    class Table<Record> : HashSet<Record>
     {
         /**
          * filters the Table by the given predicate
          */
-        public void filter(Predicate<T> pred)
+        public Table<Record> filter(Predicate<Record> pred)
         {
-            RemoveWhere((T record) => pred(record) == false);
+            RemoveWhere((Record record) => pred(record) == false);
+            return this;
         }
     }
 }
