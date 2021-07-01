@@ -13,6 +13,7 @@ namespace Datationbase.Database
          */
         public Table<Record> filter(Predicate<Record> pred)
         {
+            // TODO should we copy the Table??
             RemoveWhere((Record record) => pred(record) == false);
             return this;
         }
