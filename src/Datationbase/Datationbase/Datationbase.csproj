@@ -44,7 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Actions.cs" />
+    <Compile Include="Database\Config.cs" />
+    <Compile Include="Database\ReadFromStore.cs" />
     <Compile Include="Database\Table.cs" />
+    <Compile Include="Database\WriteToSystem.cs" />
     <Compile Include="Implementation\Employee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
