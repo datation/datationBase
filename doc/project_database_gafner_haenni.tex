@@ -113,6 +113,35 @@ Bei 100'000 Datensätzen darf die Zugriffszeit auf einen Datensatz nicht länger
 Die Datenbank wird mittels C\# implementiert.
 \subsubsection{Projektabgabe}
 Das Produkt sowie die Projektdokumentation müssen bis am 28.09.2021 um 18:30 Uhr abgegeben sein.
+\section{Konzept}
+\subsection{Zugriffssprache IAccess}
+Wir haben uns dazu entschieden, dass der Zugriff auf die Datenbank direkt über eine DLL geschieht. Zum Nutzen der Datenbank muss der Entwickler unsere DLL einbinden und kann anschliessend direkt in C\# sein Datenmodell erstellen und seine Abfragen tätigen.
+ Zum definieren einer neuen Tabelle wird also Befehl übermittelt, sondern es wird eine neue Klasse erstellt, welche die Struktur der Tabelle angibt.
+\subsection{Feld}
+Ein Feld beinhaltet einen Namen und einen Wert in einem bestimmten Typ. 
+Die Datenbank kann nur mit folgenden C\# Datentypen umgehen: 
+\begin{itemize}
+	\item string
+	\item int
+	\item boolean
+\end{itemize}
+\paragraph{Beispiel}
+Vorname = Hans
+\subsection{Record}
+Mehrere Felder werden zu einem Datensatz (Record) gegliedert. Ein Record definiert seine Felder, deren Namen und welchen Typ ein Feld hat.
+\subsection{Tabelle}
+Ein Tabelle besteht aus mehreren *gleichen* Records. Auf der Tabelle wird festgelegt welchen Typ von Datensatz sie enthaltet. 
+ 
+ \subsection{Persistenz der Daten}
+ \subsubsection{Tabellen speichern}
+ Für jede Tabelle wird eine Datei erstellt. Der Tabellenname wird im Filenamen hinterlegt. 
+ Die Datensätze dieser Tabelle werden im CSV-Format in der jeweiligen Tabellendatei abgelegt.
+ \subsection{Synchronisieren der Daten mit dem persistenten Speicher}
+ Die Daten müssen aus dem temporären Speicher in den persistenten Speicher geschrieben und auch wieder ausgelesen werden. Dieser Prozess ist sehr aufwändig und kann die Datenbank schnell verlangsamen. Wird jedoch nicht Regelmässig mit dem persistenten Speicher synchronisiert, können die Daten veraltet sein. Um festzulegen wann und wie die Synchronisation stattfindet wurde ein Variantenentscheid durchgeführt. 
+ \subsubsection{V1: Laden und Speichern bei jeder Aktion}
+ Bei jedem hinzufügen eines Records wird dieser im Filesystem abgelegt.
+ 
+ \subsubsection{V2: Laden und speicher über eigene Funktion}
 
 
 \end{document}
