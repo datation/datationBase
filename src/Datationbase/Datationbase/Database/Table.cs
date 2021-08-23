@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Datationbase.Database
 {
-    class Table<Record> : HashSet<Record>
+    class Table<T> : HashSet<T> where T : Record
     {
         public Table() : base() { }
-        public Table(HashSet<Record> hashSet) : base(hashSet) { }
+        public Table(HashSet<T> hashSet) : base(hashSet) { }
     }
 }
