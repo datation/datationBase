@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 
 namespace Datationbase.Implementation
 {
-    static class Employee
+    class Employee: Record
     {
-        public static Record New(int id, string name, int salary)
+        public Employee(int id, string name, int salary)
         {
-            Record record = new Record();
-            record.Add("id", id);
-            record.Add("name", name);
-            record.Add("salary", salary);
-            return record;
+            Add("id", id);
+            Add("name", name);
+            Add("salary", salary);
         }
+        //public static Record New(int id, string name, int salary)
+        //{
+        //    Record record = new Record();
+        //    record.Add("id", id);
+        //    record.Add("name", name);
+        //    record.Add("salary", salary);
+        //    return record;
+        //}
     }
 }
 // <Employee>

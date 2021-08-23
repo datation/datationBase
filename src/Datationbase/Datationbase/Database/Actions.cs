@@ -13,37 +13,37 @@ namespace Datationbase.Database
          * The select operator is used to select records in our table.
          * This function will take a list of Records and return only the Records that meet all given predicates.
          */
-        public static Table<Record> Select(Table<Record> table, List<Predicate<Record>> predicates)
+        public static Table<T> Select<T>(Table<T> table, List<Predicate<T>> predicates) where T: Record
         {
-            Table<Record> filteredTable = new Table<Record>(table);
-            foreach (Predicate<Record> predicate in predicates)
+            Table<T> filteredTable = new Table<T>(table);
+            foreach (Predicate<T> predicate in predicates)
             {
-                filteredTable.RemoveWhere((Record record) => predicate(record) == false);
+                filteredTable.RemoveWhere((T record) => predicate(record) == false);
             }
             return filteredTable;
         }
 
-        /**
-         * The project operator allows the user to apply filters to the columns (i.e the removing of unnecessary information).
-         */
-        public static Table<Record> Project(Table<Record> table, List<string> columns)
-        {
-            Table<Record> newTable = new Table<Record>();
-            foreach (Record record in table)
-            {
-                newTable.Add(Record.Filter(record, it => columns.Contains(it.Key)));
-            }
-            return newTable;
-        }
+        ///**
+        // * The project operator allows the user to apply filters to the columns (i.e the removing of unnecessary information).
+        // */
+        //public static Table<T> Project<T>(Table<T> table, List<string> columns) where T : Record
+        //{
+        //    Table<T> newTable = new Table<T>();
+        //    foreach (T record in table)
+        //    {
+        //        newTable.Add(record.filter(it => columns.Contains(it.Key)));
+        //    }
+        //    return newTable;
+        //}
 
-        public static Table<Record> RenameColumns(Table<Record> table, Dictionary<string, string> columnRenames)
-        {
-            Table<Record> newTable = new Table<Record>();
-            foreach (Record record in table)
-            {
-                newTable.Add(Record.ReplaceKeys(record, columnRenames));
-            }
-            return newTable;
-        }
+        //public static Table<T> RenameColumns<T>(Table<T> table, Dictionary<string, string> columnRenames) where T : Record
+        //{
+        //    Table<T> newTable = new Table<T>();
+        //    foreach (T record in table)
+        //    {
+        //        newTable.Add(T.ReplaceKeys(record, columnRenames));
+        //    }
+        //    return newTable;
+        //}
     }
 }

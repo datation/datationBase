@@ -22,29 +22,8 @@ namespace Datationbase.Database
      *   }
      * }
      */
-    class Record : Dictionary<string, object> {
+    public class Record : Dictionary<string, object> {
         public Record(): base() { }
         public Record(IDictionary<string, object> dictionary) : base(dictionary) { }
-
-        public static Record Filter(Record record, Predicate<KeyValuePair<string, object>> pred)
-        {
-            return new Record(record.Where(it => pred(it)).ToDictionary(i => i.Key, i => i.Value));
-        }
-        public static Record ReplaceKeys(Record record, Dictionary<string, string> keysToName)
-        {
-            Record newRecord = new Record();
-            foreach (KeyValuePair<string, object> entry in record)
-            {
-                string newKey;
-                if (keysToName.TryGetValue(entry.Key, out newKey))
-                {
-                    newRecord.Add(newKey, entry.Value);
-                } else
-                {
-                    newRecord.Add(entry.Key, entry.Value);
-                }
-            }
-            return newRecord;
-        }
     }
 }
