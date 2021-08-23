@@ -45,9 +45,10 @@
   <ItemGroup>
     <Compile Include="Database\Actions.cs" />
     <Compile Include="Database\Config.cs" />
+    <Compile Include="Database\Parse\XML.cs" />
     <Compile Include="Database\ReadFromStore.cs" />
     <Compile Include="Database\Table.cs" />
-    <Compile Include="Database\WriteToSystem.cs" />
+    <Compile Include="Database\WriteToStore.cs" />
     <Compile Include="Implementation\Employee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataStore\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
