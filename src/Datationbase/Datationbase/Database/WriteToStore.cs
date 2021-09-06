@@ -16,18 +16,20 @@ namespace Datationbase.Database
 
             foreach (Record record in table)
             {
+                List<string> result = new List<string>();
                 foreach (KeyValuePair<string, object> field in record)
                 {
                     if (field.Value is string)
                     {
                         // Add quotes
-                        fileData += "\"" + field.Value + "\"" + ",";
+                        result.Add("\"" + field.Value + "\"");
                     } else
                     {
                         // Save as is
-                        fileData += field.Value + ",";
+                        result.Add(field.Value.ToString());
                     }
                 }
+                fileData += string.Join(",", result);
                 fileData += "\n";
             }
 
