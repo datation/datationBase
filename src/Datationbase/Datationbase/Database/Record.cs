@@ -22,7 +22,7 @@ namespace Datationbase.Database
      *   }
      * }
      */
-    public class Record : Dictionary<string, object> {
+    public abstract class Record : Dictionary<string, object> {
         public Record(): base() { }
         public Record(IDictionary<string, object> dictionary) : base(dictionary) { }
     }
