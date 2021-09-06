@@ -14,21 +14,27 @@ namespace Datationbase.Database
             string fileData = "";
             string filePath = @Config.path + typeof(T).Name + ".txt";
 
-            if (!File.Exists(filePath))
+            foreach (Record record in table)
             {
-                File.Create(filePath);
-            } else
-            {
-                fileData = File.ReadAllText(filePath);
+                foreach (KeyValuePair<string, object> field in record)
+                {
+                    if (field.Value is string)
+                    {
+                        // Add quotes
+                        fileData += "\"" + field.Value + "\"" + ",";
+                    } else
+                    {
+                        // Save as is
+                        fileData += field.Value + ",";
+                    }
+                }
+                fileData += "\n";
             }
 
-            fileData += string.Join("", table);
-
-            File.WriteAllText(filePath, fileData, Encoding.UTF8);
-
-
-            Console.WriteLine(fileData);
-            Console.ReadLine();
+            using (StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.Write(fileData);
+            }
         }
     }
 }
