@@ -12,7 +12,7 @@ namespace Datationbase.Database
         public static void Write<T>(Table<T> table) where T: Record
         {
             string fileData = "";
-            string filePath = @Config.path + typeof(T).Name + ".txt";
+            string filePath = @Config.path + typeof(T).Name + ".csv";
 
             foreach (Record record in table)
             {

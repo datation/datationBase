@@ -16,7 +16,7 @@ namespace Datationbase.Database
 
         public static Table<T> Read<T>() where T : Record
         {
-            string filePath = @Config.path + typeof(T).Name + ".txt";
+            string filePath = @Config.path + typeof(T).Name + ".csv";
             using (var reader = new StreamReader(@filePath))
             {
                 Table<T> returnValue = new Table<T>();
