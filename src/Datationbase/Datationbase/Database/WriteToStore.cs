@@ -33,7 +33,7 @@ namespace Datationbase.Database
                 fileData += "\n";
             }
 
-            using (StreamWriter sw = new StreamWriter(filePath, true))
+            using (StreamWriter sw = new StreamWriter(filePath, false))
             {
                 sw.Write(fileData);
             }
