@@ -2,6 +2,7 @@
 using Datationbase.Implementation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Datationbase
 {
@@ -9,39 +10,18 @@ namespace Datationbase
     {
         static void Main(string[] args)
         {
-            Table<Employee> employees = new Table<Employee>();
-            employees.Add(new Employee(1, "Jon Doe", 60000));       // INSERT INTO EMPLOYEE (ID, NAME, SALARY) VALUES (1, "Jon Doe", 60000);
-            employees.Add(new Employee(2, "Max Muster", 40000));   // INSERT INTO EMPLOYEE (ID, NAME, SALARY) VALUES (1, "Max Muster", 40000);
-            employees.Add(new Employee(3, "Marie Muster", 80000));
-            log("Alle Mitarbeiter", employees);
-            Predicate<Employee> pred = (Employee record) => (int)record["salary"] > 50000;  // SALARY > 50000
-            Predicate<Employee> pred2 = (Employee record) => (int)record["salary"] < 70000; // SALARY < 70000
-            List<Predicate<Employee>> predicates = new List<Predicate<Employee>>();
-            predicates.Add(pred);
-            predicates.Add(pred2);
-            Table<Employee> newEmployees = Actions.Select(employees, predicates); // SELECT * FROM Employee WHERE SALARY > 50000 AND SALARY < 70000
-            log("Gefilterte Mitarbeiter", newEmployees);
-            //List<string> fieldsToDisplay = new List<string> { "id", "name" };
-            //Table<Record> projectedEmployees = Actions.Project(employees, fieldsToDisplay); // SELECT id, name FROM Employee
-            //log("Nur ID und name", projectedEmployees);
-            //Console.WriteLine("yeah2");
-            //Dictionary<string, string> keysToReplace = new Dictionary<string, string>() { ["name"] = "full name"};
-            //Table<Record> renamedEmployees = Actions.RenameColumns(employees, keysToReplace); // SELECT *, name AS "full name" as FROM Employee
-            //log("Full name statt name", renamedEmployees);
-            Console.ReadLine();
-
-            //Table<Person> _myTable = new Table<Person>();
-            
-            //Console.WriteLine(_myTable.GetType().GetGenericArguments()[0]);
-            //_myTable.Add(new Person(1, "hans", 1000));
-            //Console.ReadLine();
-
+            // insertData();
+            // insertDataXML();
+            // read();
+            // readFromNothing();
+            // readWithPredicates();
+            updateData();
         }
 
-        static void log<T>(string title, Table<T> employees) where T: Record
+        static void log<T>(string title, Table<T> schadensfaelle) where T: Record
         {
             Console.Write("\n" + title + "\n\n");
-            foreach(Record record in employees)
+            foreach(Record record in schadensfaelle)
             {
                 foreach(KeyValuePair<string,object> field in record)
                 {
@@ -49,6 +29,89 @@ namespace Datationbase
                 }
                 Console.Write("\n");
             }
+        }
+
+
+        // Test Methods
+        static void insertData()
+        {
+            // Preconditions
+
+            // Test
+            Table<Schadensfall> schadensfaelle = new Table<Schadensfall>();
+            schadensfaelle.Add(new Schadensfall(1, "Jon Doe", 60000));       // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (1, "Jon Doe", 60000);
+            schadensfaelle.Add(new Schadensfall(2, "Max Muster", 40000));    // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (2, "Max Muster", 40000);
+            schadensfaelle.Add(new Schadensfall(3, "Marie Muster", 80000));  // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (3, "Marie Muster", 80000);
+            WriteToStore.Write<Schadensfall>(schadensfaelle);
+        }
+
+        static void insertDataXML()
+        {
+            // Todo
+        }
+
+        static void read()
+        {
+            // Preconditions
+            Table<Schadensfall> schadensfaelle = new Table<Schadensfall>();
+            schadensfaelle.Add(new Schadensfall(1, "Jon Doe", 60000));       // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (1, "Jon Doe", 60000);
+            schadensfaelle.Add(new Schadensfall(2, "Max Muster", 40000));    // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (2, "Max Muster", 40000);
+            schadensfaelle.Add(new Schadensfall(3, "Marie Muster", 80000));  // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (3, "Marie Muster", 80000);
+            WriteToStore.Write<Schadensfall>(schadensfaelle);
+
+            // Test
+            Table<Schadensfall> readSchadensfaelle = ReadFromStore.Read<Schadensfall>();
+            log("From file Mitarbeiter", readSchadensfaelle);
+            Console.ReadLine();
+        }
+
+        static void readFromNothing()
+        {
+            // Preconditions
+            
+            // Test
+            Table<Schadensfall> readSchadensfaelle = ReadFromStore.Read<Schadensfall>();
+            log("From file Schadensfall", readSchadensfaelle);
+            Console.ReadLine();
+        }
+
+        static void readWithPredicates()
+        {
+            // Preconditions
+            Table<Schadensfall> schadensfaelle = new Table<Schadensfall>();
+            schadensfaelle.Add(new Schadensfall(1, "Jon Doe", 60000));       // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (1, "Jon Doe", 60000);
+            schadensfaelle.Add(new Schadensfall(2, "Max Muster", 40000));    // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (2, "Max Muster", 40000);
+            schadensfaelle.Add(new Schadensfall(3, "Marie Muster", 80000));  // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (3, "Marie Muster", 80000);
+            WriteToStore.Write<Schadensfall>(schadensfaelle);
+            Table<Schadensfall> readSchadensfaelle = ReadFromStore.Read<Schadensfall>();
+
+            // Test
+            Predicate<Schadensfall> pred = (Schadensfall record) => (int)record["amount"] > 50000;  // AMOUNT > 50000
+            Predicate<Schadensfall> pred2 = (Schadensfall record) => (int)record["amount"] < 70000; // AMOUNT < 70000
+            List<Predicate<Schadensfall>> predicates = new List<Predicate<Schadensfall>>();
+            predicates.Add(pred);
+            predicates.Add(pred2);
+            Table<Schadensfall> newSchadensfaelle = Actions.Select(readSchadensfaelle, predicates); // SELECT * FROM Schadensfall WHERE AMOUNT > 50000 AND AMOUNT < 70000
+            log("From file Schadensfall", newSchadensfaelle);
+            Console.ReadLine();
+        }
+
+        static void updateData()
+        {
+            // Preconditions
+            Table<Schadensfall> schadensfaelle = new Table<Schadensfall>();
+            schadensfaelle.Add(new Schadensfall(1, "Jon Doe", 60000));       // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (1, "Jon Doe", 60000);
+            schadensfaelle.Add(new Schadensfall(2, "Max Muster", 40000));    // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (2, "Max Muster", 40000);
+            schadensfaelle.Add(new Schadensfall(3, "Marie Muster", 80000));  // INSERT INTO SCHADENSFALL (ID, NAME, AMOUNT) VALUES (3, "Marie Muster", 80000);
+            WriteToStore.Write<Schadensfall>(schadensfaelle);
+            Table<Schadensfall> readSchadensfaelle = ReadFromStore.Read<Schadensfall>();
+
+            // Test
+            readSchadensfaelle.Remove(schadensfaelle.ElementAt(1));
+            readSchadensfaelle.Add(new Schadensfall(1, "John Doe", 65000));
+            WriteToStore.Write(schadensfaelle);
+            log("From file Schadensfall", schadensfaelle);
+            Console.ReadLine();
         }
     }
 }
