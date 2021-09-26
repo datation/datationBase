@@ -11,11 +11,11 @@ namespace Datationbase
         static void Main(string[] args)
         {
             // insertData();
-            // insertDataXML();
+            insertDataXML();
             // read();
             // readFromNothing();
             // readWithPredicates();
-            updateData();
+            // updateData();
         }
 
         static void log<T>(string title, Table<T> schadensfaelle) where T: Record
@@ -47,7 +47,11 @@ namespace Datationbase
 
         static void insertDataXML()
         {
-            // Todo
+            // Preconditions
+
+            // Test
+            Table<Schadensfall> schadensfaelle = XML.Read<Schadensfall>("PATH_TO_XML");
+            WriteToStore.Write<Schadensfall>(schadensfaelle);
         }
 
         static void read()

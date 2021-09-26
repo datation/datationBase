@@ -16,11 +16,6 @@ namespace Datationbase.Implementation
             Add("name", name);
             Add("amount", amount);
         }
-        public Schadensfall(object[] obj)
-        {
-            Add("id", obj[0]);
-            Add("name", obj[1]);
-            Add("amount", obj[2]);
-        }
+        public Schadensfall(IDictionary<string, object> dictionary) : base(dictionary) { }
     }
 }

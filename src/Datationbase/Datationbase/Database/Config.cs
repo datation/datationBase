@@ -8,6 +8,8 @@ namespace Datationbase.Database
 {
     class Config
     {
-        public string path = "";
+        // Path to the location where you want to store the files
+        // e.g. C://Users/USERNAME/source/repos/datationBase/src/Datationbase/Datationbase/DataStore/
+        public static string path = "";
     }
 }
