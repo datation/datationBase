@@ -49,7 +49,7 @@
     <Compile Include="Database\ReadFromStore.cs" />
     <Compile Include="Database\Table.cs" />
     <Compile Include="Database\WriteToStore.cs" />
-    <Compile Include="Implementation\Employee.cs" />
+    <Compile Include="Implementation\Schadensfall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\Record.cs" />
