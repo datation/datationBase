@@ -11,7 +11,7 @@ namespace Datationbase
         static void Main(string[] args)
         {
             // insertData();
-            insertDataXML();
+            // insertDataXML();
             // read();
             // readFromNothing();
             // readWithPredicates();
@@ -113,8 +113,8 @@ namespace Datationbase
             // Test
             readSchadensfaelle.Remove(schadensfaelle.ElementAt(1));
             readSchadensfaelle.Add(new Schadensfall(1, "John Doe", 65000));
-            WriteToStore.Write(schadensfaelle);
-            log("From file Schadensfall", schadensfaelle);
+            WriteToStore.Write(readSchadensfaelle);
+            log("From file Schadensfall", readSchadensfaelle);
             Console.ReadLine();
         }
     }
